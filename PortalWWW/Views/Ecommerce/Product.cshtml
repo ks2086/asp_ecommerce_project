@@ -1,0 +1,134 @@
+﻿@using Data.Models;
+@using System.Text.Encodings.Web
+@using System.Web
+
+@{
+    var product = ViewData["Product"] as Product;
+    string productDescription = HttpUtility.HtmlDecode(product.Text);
+    var newProducts = ViewData["NewProducts"] as List<Product>;
+}
+
+<div class="product-details">
+
+    <div class="container pt-4 pb-4">
+
+       @if(product == null)
+       {
+            <h4>Brak treści do wyswietlenia</h4>
+       }
+       else
+       {
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Strona główna</a></li>
+                    <li class="breadcrumb-item"><a asp-area="" asp-controller="Ecommerce" asp-action="Index">Lista produktów</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Szczegóły produktu</li>
+                </ol>
+            </nav>
+
+            <h1>@product.Title</h1>
+
+
+            <div class="row">
+                <div class="col-sm-12 col-md-4">
+
+                    <div class="card text-center" style="font-weight: bold">
+                        <img src="@product.Images.Url" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title"><strong>Kurs ten obejmuje</strong></h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">48 godz. treści wideo na życzenie</li>
+                            <li class="list-group-item">Artykuły: 4</li>
+                            <li class="list-group-item">Zasoby do pobrania: 22</li>
+                            <li class="list-group-item">Dostęp na urządzeniach mobilnych i telewizorach</li>
+                            <li class="list-group-item">Całkowity dożywotni dostęp</li>
+                            <li class="list-group-item">Certyfikat ukończenia</li>
+                        </ul>
+
+                    </div>
+
+                </div>
+                <div class="col-sm-12 col-md-8">
+
+                    <p>
+                        @product.ShortDescription
+                    </p>
+                    <h3 class="@(product.IsPromotion ? "card-title productPrice" : "card-title")">Cena kursu: <strong><span class="@(product.IsPromotion ? "promoValue" : "nonPromo")">@product.PriceBrutto.ToString("0.00")</span> zł</strong></h3>
+
+                    <form class="addToCart"><input type="hidden" name="product" value="@product.Id" /><button type="submit" type="submit" class="btn btn-warning">Dodaj do koszyka</button></form>
+
+                    <div class="description mt-4">
+                        @Html.Raw(productDescription)
+                    </div>
+
+                    <div class="author">
+                        <div class="card mb-3 p-4">
+                            <div class="row g-0">
+                                <div class="col-md-2">
+                                    <img src="/img/author.png" class="img-fluid rounded-start" alt="...">
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><strong>Jan Nowak</strong></h5>
+                                        <p class="card-text">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam congue dignissim orci in viverra. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+
+                </div>
+            </div>
+        }
+
+
+    </div>
+
+    <div class="backgroundImage">
+
+        <div class="container">
+           
+            <div class="items-list">
+                <div class="row">
+                    @if (newProducts != null && (newProducts as IEnumerable<object>)?.Any() == true)
+                    {
+                        @foreach (var productItem in newProducts)
+                        {
+                            <div class="col-sm-12 col-md-4">
+                                <div class="@(productItem.IsPromotion ? "card isPromoted" : "card")">
+                                    <img src="@productItem.Images.Url" class="card-img-top" alt="@productItem.Title">
+                                    <div class="card-body">
+                                        <h2 class="card-title">@productItem.Title</h2>
+                                        <h3 class="card-title bounce"><strong><span class="promoValue">@productItem.PriceBrutto.ToString("0.00")</span> zł</strong></h3>
+                                        <p class="card-text">@productItem.ShortDescription</p>
+                                        <div class="d-grid gap-2">
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <a href="/Ecommerce/Product?slug=@productItem.Slug" class="btn btn-secondary">Zobacz szczegóły</a>
+                                                <form class="addToCart"><input type="hidden" name="product" value="@productItem.Id" /><button type="submit" type="submit" class="btn btn-warning">Dodaj do koszyka</button></form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+                    }
+
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

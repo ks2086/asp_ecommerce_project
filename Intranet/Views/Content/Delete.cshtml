@@ -1,0 +1,31 @@
+﻿@using Data.Models;
+@model Data.Models.ContentModel;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+
+    <form asp-action="Remove">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" name="Id" value="@ViewData["Id"]" />
+
+        <h4 class="module-title">Usuń materiał  (Moduł: <strong>@ViewData["type"]</strong>)</h4>
+
+        <div class="row">
+
+            <p>Potwierdź usunięcie tego matertiału</p>
+
+            <div class="input-field col s12">
+                <button class="btn waves-effect waves-red red" type="submit" name="action">
+                    Potwierdzam, usuń
+                </button>
+            </div>
+        </div>
+
+    </form>
+
+
+
+
+</div>

@@ -1,0 +1,125 @@
+﻿@using Data.Models;
+@using System.Text.Encodings.Web;
+@using System.Web;
+@{
+    ViewData["Title"] = "Home Page";
+    var bestsellers = ViewData["Bestsellers"] as List<Product>;
+    var newProducts = ViewData["NewProducts"] as List<Product>;
+
+    var welcomeElement = ViewData["WelcomeElement"] as ContentModel;
+    string welcomeElementDescription = HttpUtility.HtmlDecode(welcomeElement.Text);
+
+    var mobileElement = ViewData["MobileElement"] as ContentModel;
+    string mobileElementDescription = HttpUtility.HtmlDecode(mobileElement.Text);
+
+}
+
+<div class="header">
+
+    <div class="container">
+        <div class="col-sm-12 col-md-8">
+            <div class="title">
+                <h1>@welcomeElement.Title</h1>
+                @Html.Raw(welcomeElementDescription)
+            </div>
+        </div>
+
+        <div class="items-list">
+            <div class="row">
+                @if (newProducts != null && (newProducts as IEnumerable<object>)?.Any() == true)
+                {
+                    @foreach (var product in newProducts)
+                    {
+                        <div class="col-sm-12 col-md-4">
+                            <div class="@(product.IsPromotion ? "card isPromoted" : "card")">
+                                <img src="@product.Images.Url" class="card-img-top" alt="@product.Title">
+                                <div class="card-body">
+                                    <h2 class="card-title">@product.Title</h2>
+                                    <h3 class="card-title bounce"><strong><span class="promoValue">@product.PriceBrutto.ToString("0.00")</span> zł</strong></h3>
+                                    <p class="card-text">@product.ShortDescription</p>
+                                    <div class="d-grid gap-2">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a href="/Ecommerce/Product?slug=@product.Slug" class="btn btn-secondary">Zobacz szczegóły</a>
+                                            <form class="addToCart"><input type="hidden" name="product" value="@product.Id" /><button type="submit" type="submit" class="btn btn-warning">Dodaj do koszyka</button></form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+                }
+               
+
+               
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@await Component.InvokeAsync("SearchbarComponent")
+
+<div class="courses p-4">
+    <div class="container">
+
+        <h2>Bestsellery</h2>
+        <hr/>
+        @if (bestsellers != null && (bestsellers as IEnumerable<object>)?.Any() == true)
+        {
+            @foreach (var product in bestsellers)
+            {
+                <div class="@(product.IsPromotion ? "card mb-3 isPromotedRow" : "card mb-3")">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="@product.Images.Url" class="img-fluid rounded-start" alt="@product.Title">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h2 class="card-title"><strong>@product.Title</strong></h2>
+                                <h3 class="card-title">Za jedyne: <strong><span class="promoValue">@product.PriceBrutto.ToString("0.00")</span> zł</strong></h3>
+                                <p class="card-text">@product.ShortDescription</p>
+                                <div class="d-grid gap-2">
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <a href="/Ecommerce/Product?slug=@product.Slug" class="btn btn-secondary">Zobacz szczegóły</a>
+                                        <form class="addToCart"><input type="hidden" name="product" value="@product.Id" /><button type="submit" type="submit" class="btn btn-warning">Dodaj do koszyka</button></form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+        
+
+      
+
+    </div>
+</div>
+
+<div class="mobile">
+    <div class="container">
+
+        <div class="col-sm-12 col-md-12">
+
+            <div class="title">
+                <h2>@mobileElement.Title</h2>
+                @Html.Raw(mobileElementDescription)
+
+                <div class="mt-4">
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><img src="/img/android.png" alt="" /></li>
+                        <li class="list-inline-item"><img src="/img/apple.png" alt="" /></li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div> 

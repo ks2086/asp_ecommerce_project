@@ -1,0 +1,30 @@
+﻿@using Data.Models;
+@using System.Text.Encodings.Web
+@using System.Web
+
+@{
+    var pageElement = ViewData["Page"] as ContentModel;
+    string pageDescription = HttpUtility.HtmlDecode(pageElement.Text);
+}
+
+<div class="single-page about">
+
+    <div class="backgroundImage"></div>
+
+    <div class="container">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Strona główna</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@pageElement.Title</li>
+            </ol>
+        </nav>
+
+        <h1>@pageElement.Title</h1>
+
+        @Html.Raw(pageDescription)
+
+    </div>
+
+    <div class="backgroundImage bottom"></div>
+</div>

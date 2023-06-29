@@ -1,0 +1,59 @@
+﻿@using Data.Models;
+
+@{
+
+    var products = ViewData["Cart"] as List<CartModel>;
+    
+}
+
+<div class="product-details">
+    <div class="container pt-4 pb-4">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Strona główna</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Koszyk</li>
+            </ol>
+        </nav>
+
+        <h1>Koszyk zakupowy</h1>
+
+        @if (products != null && (products as IEnumerable<object>)?.Any() == true)
+        {
+
+            <div class="cart-content mt-4">
+                @foreach (var product in products)
+                {
+                    <div class="cart-item row p-4 mb-1">
+                        <div class="col-sm-12 col-md-8 col-lg-8 title">@product.ProductTitle</div>
+                        <div class="col-sm-12 col-md-2 col-lg-2 price" data-price="@product.UnitPrice">@product.UnitPrice.ToString("0.00") PLN</div>
+                        <div class="col-sm-12 col-md-2 col-lg-2"><form asp-controller="Ecommerce" asp-action="DeleteFromCart"><input type="hidden" name="cart" value="@product.Id.ToString()" /><button type="submit" class="btn btn-sm btn-danger">Usuń</button></form></div>
+                    </div>
+                }
+
+                <hr/>
+                <div class="row cart-summary">
+                    <div class="col-sm-12 col-md-8 col-lg-8"></div>
+                    <div class="col-sm-12 col-md-4 col-lg-4">
+                        <h6>Wartość produktów w koszyku: <strong><span id="cartSummary">0.00</span> PLN</strong></h6>
+                    </div>
+                </div>
+
+                <div class="row submit-cart mt-4">
+                    <div class="col-sm-12 col-md-10 col-lg-9"></div>
+                    <div class="col-sm-12 col-md-2 col-lg-3">
+                        <button type="button" class="btn btn-success" id="storeOrder">Finalizuj zamówienie</button>
+                    </div>
+                </div>
+            </div>
+
+        }
+        else
+        {
+            <p>Brak produktów w koszyku</p>
+        }
+
+
+
+    </div>
+</div>

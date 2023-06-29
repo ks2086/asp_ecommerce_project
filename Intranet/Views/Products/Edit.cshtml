@@ -1,0 +1,178 @@
+﻿@using Data.Models;
+@model Intranet.Models.ProductModelsAggregation;
+
+@{
+    var item = ViewData["Item"] as Product;
+}
+
+<h4 class="module-title">Aktualizuj produkt</h4>
+<div class="row">
+
+    <div class="col s3">
+        @await Html.PartialAsync("PartialViews/EcommerceMainMenu")
+    </div>
+
+    <div class="col s9">
+        <form asp-action="Update">
+            <input type="hidden" name="Id" value="@item.Id.ToString()" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+           
+            <div class="row">
+
+                <div class="input-field col s12">
+                    <input id="input_text" type="text" value="@item.Title" name="Title" data-length="255" required>
+                    <label asp-for="@Model.Product.Title" class="control-label"></label>
+                    <span asp-validation-for="@Model.Product.Title" class="text-danger"></span>
+                </div>
+
+                <div class="row">
+                    <div class="col s5">
+
+                        <div class="input-field col s12">
+                            <select name="Tax">
+                                <option value="" disabled>Wybierz z listy</option>
+                                <option value="0" selected="@((item.Tax == 0).ToString().ToLower())">0%</option>
+                                <option value="5" selected="@((item.Tax == 5).ToString().ToLower())">5%</option>
+                                <option value="8" selected="@((item.Tax == 8).ToString().ToLower())">8%</option>
+                                <option value="23" selected="@((item.Tax == 23).ToString().ToLower())">23%</option>
+                            </select>
+                            <label>Wybierz wartość podatku VAT</label>
+                        </div>
+
+                    </div>
+
+                    <div class="col s6">
+
+                        <div class="input-field col s12">
+                            <input id="input_text_2" type="number" min="0.01" step="0.01" name="PriceNetto" value="@item.PriceNetto" data-length="255" required>
+                            <label asp-for="@Model.Product.PriceNetto" class="control-label"></label>
+                            <span asp-validation-for="@Model.Product.PriceNetto" class=" text-danger"></span>
+                        </div>
+
+                    </div>
+                    <div class="col s1">
+
+                        <div class="input-field col s12">
+                            <p>PLN</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s4">
+
+                        <div class="input-field col s12">
+                            <select name="IsPromotion">
+                                <option value="false">NIE</option>
+                                <option value="true">TAK</option>
+                            </select>
+                            <label>Produkt objęty promocją</label>
+                        </div>
+
+                    </div>
+
+                    <div class="col s4">
+
+                        <div class="input-field col s12">
+                            <select name="IsBestseller">
+                                <option value="false" >NIE</option>
+                                <option value="true">TAK</option>
+                            </select>
+                            <label>Produkt jest bestsellerem</label>
+                        </div>
+
+                    </div>
+
+                    <div class="col s4">
+
+                        <div class="input-field col s12">
+                            <select name="DifficultyLevel">
+                                <option value="1" selected="@((item.DifficultyLevel == 1).ToString().ToLower())">Początkujący</option>
+                                <option value="2" selected="@((item.DifficultyLevel == 2).ToString().ToLower())">Średnio-zaawansowany</option>
+                                <option value="3" selected="@((item.DifficultyLevel == 3).ToString().ToLower())">Zaawansowany</option>
+                            </select>
+                            <label>Poziom trudności</label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col s6">
+
+                        <div class="input-field col s12">
+                            <select name="Image">
+                                <option value="" disabled selected>Wybierz z listy</option>
+                                @foreach (var image in (List<ProductImage>)ViewData["Gallery"])
+                                {
+                                    if (image.Id.ToString() == @item.ImageId)
+                                    {
+                                        <option value="@image.Id" selected>@image.Title</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@image.Id">@image.Title</option>
+                                    }
+
+                                }
+                            </select>
+                            <label>Wybierz pozycję z galerii</label>
+                        </div>
+
+                    </div>
+
+                    <div class="col s6">
+
+                        <div class="input-field col s12">
+                            <select name="Category">
+                                <option value="" disabled selected>Wybierz z listy</option>
+                                @foreach (var category in (List<ProductCategory>)ViewData["Categories"])
+                                {
+                                    if (category.Id.ToString() == @item.CategoryId)
+                                    {
+                                        <option value="@category.Id" selected>@category.Title</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@category.Id">@category.Title</option>
+                                    }
+                                    
+                                }
+                            </select>
+                            <label>Wybierz pozycję z galerii</label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="input-field col s12">
+                    <textarea id="textarea1" name="ShortDescription" class="materialize-textarea">@item.ShortDescription</textarea>
+                    <label for="textarea1">Krótki opis produktu</label>
+                </div>
+
+                <div class="input-field col s12">
+                    <label>Podaj pełny opis produktu</label><br /><br />
+                    <textarea name="text">@item.Text</textarea>
+                    <script>
+                        CKEDITOR.replace('text');
+                    </script>
+
+                    <span asp-validation-for="@Model.Product.Text" class="text-danger"></span>
+                </div>
+
+
+                <div class="input-field col s12">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">
+                        Zapisz i wróć do listy produktów
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>

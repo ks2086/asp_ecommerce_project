@@ -1,0 +1,60 @@
+﻿@using Data.Models;
+@using System.Text.Encodings.Web
+@using System.Web
+
+@{
+    var searchResults = ViewData["SearchResults"] as List<Product>;
+}
+
+<div class="single-page about">
+
+    @await Component.InvokeAsync("SearchbarComponent")
+    <div class="container">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Strona główna</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Wyszukaj produkty</li>
+            </ol>
+        </nav>
+        <h2>Wyniki wyszukiwania dla frazy <strong>@ViewData["SearchQuery"]</strong></h2>
+        <p>Znaleziono <strong>@searchResults.Count()</strong> wyników.</p>
+        @if (searchResults != null && (searchResults as IEnumerable<object>)?.Any() == true)
+        {
+            
+            <hr/>
+            <div class="items-list">
+                <div class="row">
+                    @foreach (var product in searchResults)
+                    {
+                        <div class="col-sm-12 col-md-4">
+                            <div class="@(product.IsPromotion ? "card isPromoted" : "card")">
+                                <img src="@product.Images.Url" class="card-img-top" alt="@product.Title">
+                                <div class="card-body">
+                                    <h2 class="card-title">@product.Title</h2>
+                                    <h3 class="card-title bounce"><strong><span class="promoValue">@product.PriceBrutto.ToString("0.00")</span> zł</strong></h3>
+                                    <p class="card-text">@product.ShortDescription</p>
+                                   
+                                    <div class="d-grid gap-2">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a href="/Ecommerce/Product?slug=@product.Slug" class="btn btn-secondary">Zobacz szczegóły</a>
+                                            <form class="addToCart"><input type="hidden" name="product" value="@product.Id" /><button type="submit" type="submit" class="btn btn-warning">Dodaj do koszyka</button></form>
+                                        </div>
+                                    </div>
+
+                            </div>
+                           </div>
+
+                       </div>
+                    }    
+                </div>
+            </div>
+        }
+        
+
+       
+
+    </div>
+
+    <div class="backgroundImage bottom"></div>
+</div>

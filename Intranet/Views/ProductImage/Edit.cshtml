@@ -1,0 +1,41 @@
+﻿@using Data.Models;
+@model Data.Models.ProductImage;
+
+<h4 class="module-title">Aktualizuj pozycję w galerii</h4>
+<div class="row">
+
+    <div class="col s3">
+        @await Html.PartialAsync("PartialViews/EcommerceMainMenu")
+    </div>
+
+    <div class="col s9">
+        <form asp-action="Update">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" name="Id" value="@ViewData["Id"]" />
+
+            <div class="row">
+
+                <div class="input-field col s12">
+                    <input id="input_text" type="text" asp-for="Title" name="Title" data-length="255" required>
+                    <label asp-for="Title" class="control-label"></label>
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="input-field col s12">
+                    <input id="input_text-2" type="text" asp-for="Url" name="Url" data-length="255" required>
+                    <label asp-for="Url" class="control-label"></label>
+                    <span asp-validation-for="Url" class="text-danger"></span>
+                </div>
+
+
+                <div class="input-field col s12">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">
+                        Zapisz i wróć do listy kategorii
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>

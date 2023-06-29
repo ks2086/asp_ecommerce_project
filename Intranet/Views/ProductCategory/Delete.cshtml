@@ -1,0 +1,29 @@
+﻿@using Data.Models;
+@model Data.Models.ProductCategory;
+
+<h4 class="module-title">Usuń kategorię produktową</h4>
+<div class="row">
+
+    <div class="col s3">
+        @await Html.PartialAsync("PartialViews/EcommerceMainMenu")
+    </div>
+
+    <div class="col s9">
+        <form asp-action="Remove">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" name="Id" value="@ViewData["Id"]" />
+
+            <div class="row">
+                <p>Potwierdź usunięcie tej kategorii produktowej</p>
+
+                <div class="input-field col s12">
+                    <button class="btn waves-effect waves-red red" type="submit" name="action">
+                        Usuń i wróć do listy kategorii
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>

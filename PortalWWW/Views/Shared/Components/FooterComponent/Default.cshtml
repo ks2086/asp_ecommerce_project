@@ -1,0 +1,56 @@
+﻿@using Data.Models;
+<footer class="p-5">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-12 col-md-4">
+                <a class="navbar-brand logo" href="#">AkademiaFullStack</a>
+                <ul class="list-unstyled">
+                    <li><strong>Akademia FullStack So z o.o<br />ul. Lorem Ipsum 12/3<br />Kraków 20-765</strong></li>
+                </ul>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <ul class="list-unstyled">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Strona główna</a></li>
+                    @if (ViewData["FooterLinks"] != null && (ViewData["FooterLinks"] as IEnumerable<object>)?.Any() == true)
+                    {
+                        @foreach (var link in (List<ContentModel>)ViewData["FooterLinks"])
+                        {
+                            <li>
+                                <a href="/Home/Page?slug=@link.Slug">@link.Title</a>
+                            </li>
+                        }
+                    }
+                    <li>
+                        <a href="/Ecommerce">Produkty</a>
+                    </li>
+                    <li>
+                        <a href="/Home/Page?slug=kontakt">Kontakt</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <h4>Skontaktuj się z nami</h4>
+                <form>
+                    <div class="form-group">
+                        <label>Podaj swój adres e-mail</label>
+                        <input type="email" class="form-control" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Podaj temat wiadomości</label>
+                        <input type="text" class="form-control" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Podaj treść wiadomości</label>
+                        <textarea name="content" rows="5" class="form-control" required></textarea>
+                    </div>
+
+                    <input type="submit" class="btn btn-secondary mt-3" value="Wyślij wiadomość" />
+                </form>
+            </div>
+        </div>
+
+    </div>
+</footer>

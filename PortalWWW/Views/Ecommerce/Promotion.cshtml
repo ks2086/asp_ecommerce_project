@@ -1,0 +1,46 @@
+﻿@using Data.Models;
+@{
+   
+    var products = ViewData["Products"] as List<Product>;
+
+}
+
+<div class="about">
+
+    <div class="container">
+        
+        <h1>Produkty promocyjne</h1>
+        <div class="items-list">
+            <div class="row">
+                @if (products != null && (products as IEnumerable<object>)?.Any() == true)
+                {
+                    @foreach (var product in products)
+                    {
+                        <div class="col-sm-12 col-md-4">
+                            <div class="@(product.IsPromotion ? "card isPromoted" : "card")">
+                                <img src="@product.Images.Url" class="card-img-top" alt="@product.Title">
+                                <div class="card-body">
+                                    <h2 class="card-title">@product.Title</h2>
+                                    <h3 class="card-title bounce"><strong><span class="promoValue">@product.PriceBrutto.ToString("0.00")</span> zł</strong></h3>
+                                    <p class="card-text">@product.ShortDescription</p>
+                                    <div class="d-grid gap-2">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a href="/Ecommerce/Product?slug=@product.Slug" class="btn btn-secondary">Zobacz szczegóły</a>
+                                            <form class="addToCart"><input type="hidden" name="product" value="@product.Id" /><button type="submit" type="submit" class="btn btn-warning">Dodaj do koszyka</button></form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>Brak treści do wyświetlenia</p>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>

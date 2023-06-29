@@ -1,0 +1,50 @@
+﻿@using Data.Models;
+
+@{
+
+    var account = ViewData["Account"] as UserModel;
+
+}
+<div class="container">
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Witaj <strong>@account.Email</strong> w panelu użytkownika</h5>
+
+
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Moje zamówienia</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Ustawienia profilu</button>
+        </li>
+        
+        
+    </ul>
+    <div class="tab-content userPanel" id="myTabContent">
+        <div class="tab-pane show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+
+            <div class="card">
+                <div class="card-body ordersList">
+                    
+
+                </div>
+            </div>
+
+
+        </div>
+        <div class="tab-pane" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+
+            <div class="card">
+                <div class="card-body">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

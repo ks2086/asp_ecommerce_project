@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap');
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  background-color: #eee;
+}
+
+body {
+    margin-bottom: 60px;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.module-title {
+    padding: 20px;
+    background: #eee;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.brand-logo{
+    color: #fff !important;
+    font-weight: bold;
+}
+
+a.red{
+    color: #fff !important;
+}
+
+.collection .collection-item{
+    background-color: #eee !important;
+}
+
+.collection a.collection-item:hover {
+    background-color: #ccc !important;
+}
+
+.collection a {
+        font-weight: bold;
+        text-align: center;
+        color: #121212 !important
+
+}
+
+footer, nav{
+    background-color: #121212 !important;
+    color: #fff;
+}
+
+hr {
+    border: none;
+    background-color: #e0e0e0;
+    height: 1px;
+}
+
+.btn-flat{
+    background-color: #121212 !important;
+    color: #fff !important;
+}
+
+.btn-flat.red {
+    background-color: #ca1f1f !important;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.mt-5{
+    margin-top: 25%;
+}

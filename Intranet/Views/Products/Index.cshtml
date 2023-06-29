@@ -1,0 +1,60 @@
+﻿@using Data.Models;
+
+<h4 class="module-title">Lista produktów w sklepie</h4>
+<div class="row">
+
+    <div class="col s3">
+        @await Html.PartialAsync("PartialViews/EcommerceMainMenu")
+    </div>
+
+    <div class="col s9">
+        <a href="/Products/Create" class="waves-effect waves-teal btn-flat">Dodaj nową pozycję</a>
+        <hr/>
+        @if (ViewData["items"] != null && (ViewData["items"] as IEnumerable<object>)?.Any() == true)
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Miniatura</th>
+                        <th>Tytuł</th>
+                        <th>Cena netto</th>
+                        <th>VAT</th>
+                        <th>Data dodania</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var type in (List<Product>)ViewData["items"])
+                    {
+                        <tr>
+                            <td>
+                                @if(type.Images != null)
+                                {
+                                    <img src="@type.Images.Url" style="max-height: 60px;">
+                                }
+                            </td>
+                            <td>
+                                @type.Title
+                                @if (type.Categories != null)
+                                {
+                                    <br/><small>@type.Categories.Title</small>
+                                }
+                            </td>
+                            <td><small>@type.PriceNetto PLN</small></td>
+                            <td><small>@type.Tax %</small></td>
+                            <td><small>@type.Created_at</small></td>
+                            <td><a href="/Products/Edit?id=@type.Id" class="waves-effect waves-teal btn-flat">Edycja</a></td>
+                            <td><a href="/Products/Delete?id=@type.Id" class="waves-effect waves-red btn-flat red">Usuń</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>Brak treści do wyświetlenia</p>
+        }
+    </div>
+    
+</div>

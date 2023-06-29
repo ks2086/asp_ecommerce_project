@@ -1,0 +1,11 @@
+﻿@using Data.Models;
+<div class="collection">
+    
+    @if (ViewData["ListOfTypes"] != null && (ViewData["ListOfTypes"] as IEnumerable<object>)?.Any() == true)
+    {
+        @foreach (var type in (List<ContentTypesModel>)ViewData["ListOfTypes"])
+        {
+            <a class="collection-item" href="/Content?type=@type.Slug">@type.Title</a>
+        }
+    }
+</div>

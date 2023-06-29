@@ -1,0 +1,43 @@
+﻿@using Data.Models;
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand logo" asp-area="" asp-controller="Home" asp-action="Index">AkademiaFullStack</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Strona główna</a>
+                </li>
+
+                @if (ViewData["NavigationLinks"] != null && (ViewData["NavigationLinks"] as IEnumerable<object>)?.Any() == true)
+                {
+                    @foreach (var link in (List<ContentModel>)ViewData["NavigationLinks"])
+                    {
+                        <li class="nav-item">
+                            <a href="/Home/Page?slug=@link.Slug" class="nav-link">@link.Title</a>
+                        </li>
+                    }
+                }
+
+                
+                <li class="nav-item">
+                    <a href="/Ecommerce" class="nav-link">Produkty</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Home/Page?slug=kontakt" class="nav-link">Kontakt</a>
+                </li>
+                <li class="nav-item" id="userMenu"></li>
+                <li class="nav-item">
+
+                    @await Component.InvokeAsync("CartButtonComponent")
+
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>

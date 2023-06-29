@@ -1,0 +1,40 @@
+﻿<div class="container">
+	
+	<div class="row">
+		<div class="col-sm-12 col-md-3 col-lg-3"></div>
+		<div class="col-sm-12 col-md-6 col-lg-6">
+			<div class="login-panel text-center p-4 my-5">
+
+				<h2><strong>Utwórz nowe konto</strong></h2>
+
+				<form id="registerForm" class="p-4 mt-4">
+
+					<div class="input-group mb-4">
+						<span class="input-group-text" id="basic-addon1">Adres e-mail</span>
+						<input type="email" class="form-control" placeholder="Podaj adres e-mail" name="username" required>
+						<div id="validationUsernameFeedback"></div>
+					</div>
+
+					<div class="input-group mb-4">
+						<span class="input-group-text" id="basic-addon1">Hasło</span>
+						<input type="password" class="form-control" disabled placeholder="Podaj hasło" name="password" required>
+						<div id="validationPasswordFeedback"></div>
+					</div>
+
+					<div class="form-input mb-4">
+						<label><input type="checkbox" name="policy" value="1" required/> Zapoznałem się i akceptuje warunki <a href="/Home/Page?slug=polityka-prywatnosci">polityki prywatności</a></label>
+					</div>
+
+					<button class="btn btn-success" disabled type="submit">Zarejestruj się</button>
+				</form>
+
+				<div class="row mt-4">
+					<p>Masz już konto?<br /><a href="/Account/LogIn">Zaloguj się</a></p>
+				</div>
+
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-3 col-lg-3"></div>
+	</div>
+
+</div>

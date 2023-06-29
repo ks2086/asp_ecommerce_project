@@ -1,0 +1,335 @@
+@import url('https://fonts.googleapis.com/css2?family=Delicious+Handrawn&family=Montserrat:wght@300;700&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+a{
+    color: #000;
+    font-weight: bold;
+}
+
+.logo {
+    font-family: 'Delicious Handrawn', cursive;
+    font-size: 2rem;
+}
+
+.page{
+    min-height: 85vh;
+}
+
+.page .title{
+    color: #fff;
+    background: rgba(0, 0, 0, .6);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.page .title h1 {
+    font-family: 'Delicious Handrawn', cursive;
+    font-size: 3rem;
+}
+
+.page .title p{
+    text-indent: 20%;
+}
+
+a.logo,
+.page .title h1,
+.page .title h2,
+.searchBar h3,
+.single-page .container h1
+{
+    color: #ffc107 !important
+}
+
+.searchBar p{
+    color: #fff;
+}
+
+.header{
+    background: url('../img/header.jpg') center center no-repeat;
+    background-size: cover;
+    width: 100%;
+    min-height: 1054px;
+    padding-top: 10vh;
+    padding-bottom: 18vh;
+}
+
+.header .items-list{
+    margin-top: 3%;
+}
+
+.items-list .card{
+    text-align: center
+}
+
+.items-list .card h2{
+    height: 150px;
+    font-size: 1.7em;
+}
+
+.items-list .card h3{
+    height: 40px;
+
+}
+
+.items-list .card p{
+    height: 100px;
+}
+
+.items-list .card ul.list-inline{
+    height: 40px
+}
+
+@-webkit-keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        -webkit-transform: translateY(0);
+    }
+
+    40% {
+        -webkit-transform: translateY(-30px);
+    }
+
+    60% {
+        -webkit-transform: translateY(-15px);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-30px);
+    }
+
+    60% {
+        transform: translateY(-15px);
+    }
+}
+
+.bounce {
+    animation: bounce 2s infinite;
+    -webkit-animation: bounce 2s infinite;
+    -moz-animation: bounce 2s infinite;
+    -o-animation: bounce 2s infinite;
+}
+
+.page-item.active .page-link {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #000;
+}
+
+.page-item .page-link{
+    color: #000;
+    font-weight: bold;
+}
+
+.mobile {
+    background: url('../img/mobile.jpg') center center no-repeat;
+    background-size: cover;
+    width: 100%;
+    min-height: 962px;
+    
+}
+
+.mobile .title{
+    position: relative;
+    top: 600px;
+    text-align: center
+}
+
+footer, .product-details .author .card{
+    background-color: #ffc107 !important;
+
+}
+
+footer a.logo{
+    color: #212529 !important;
+}
+
+footer a{
+    color: #212529 !important;
+    font-weight: bold;
+}
+
+footer h4,
+footer form label{
+    font-weight: bold;
+}
+
+.about .backgroundImage {
+    background: url('/img/about.jpg') center no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+}
+
+.contact .backgroundImage {
+    background: url('/img/contact.jpg') center no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+}
+
+.privacy .backgroundImage {
+    background: url('/img/policy.jpg') center no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+}
+
+.product-details .backgroundImage {
+    background: url('/img/single-product.jpg') center no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    padding: 10vh 0;
+}
+
+.backgroundImage {
+    min-height: 70vh
+}
+
+.backgroundImage.bottom {
+    height: 10vh
+}
+
+.single-page .container {
+    padding: 10vh 0;
+}
+
+.single-page .container h1{
+    font-weight: 700;
+}
+
+.product-details .author{
+    margin: 40px 0;
+}
+
+.product-details .author .card {
+    color: #000
+}
+
+.accordion-button:not(.collapsed) {
+    color: #000;
+    background-color: #ffc107;
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+    font-weight: 700
+}
+
+.promotionInfo {
+    background-color: #eceb98;
+    text-align: center;
+    padding: 10px 0 0 0;
+}
+
+.promotionInfo h3{
+    font-size: 1.3em !important;
+}
+
+.promotionInfo span{
+    font-weight: bold;
+}
+
+.promotionInfo a {
+    font-weight: bold;
+    color: #000;
+    line-height: 3;
+    font-size: .8em !important;
+}
+
+.courses h2.card-title{
+    font-size: 1.2em;
+}
+
+.courses h3.card-title{
+    font-size: 1em;
+}
+
+.cart-content .cart-item {
+    border: 1px solid #eee;
+}
+
+.cart-content .cart-item .title, .cart-content .cart-item .price {
+    background-color: inherit;
+    color: #000;
+    font-weight: bold;
+}
+
+.cart-summary, .submit-cart{
+    text-align: right;
+}
+
+.login-panel {
+    background-color: #eee;
+    -webkit-box-shadow: 0px 10px 21px -11px rgba(175, 175, 177, 1);
+    -moz-box-shadow: 0px 10px 21px -11px rgba(175, 175, 177, 1);
+    box-shadow: 0px 10px 21px -11px rgba(175, 175, 177, 1);
+}
+
+.login-panel  form{
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.userPanel .card{
+    border-top: none !important
+}
+
+.isPromoted strong, .isPromotedRow strong, .productPrice strong{
+    color: forestgreen;
+}
+
+.isPromoted .origPrice{
+    display: block;
+    font-size: .6em;
+    font-weight: bold;
+    text-decoration: line-through;
+}
+
+.productPrice .origPrice {
+    font-size: .7em;
+    color: #ccc;
+}
+
+.productPrice .origPrice strong {
+    text-decoration: line-through;
+    color: #ccc;
+}
+.searchBar .searchResults ul li {
+    color: #fff;
+    cursor: pointer;
+}
+
+.searchBar .searchResults ul li:hover{
+    background-color: #eee;
+    color: #000;
+}
+
+.searchBar .searchResults ul{
+    position: absolute;
+    background-color: #000;
+    width: 800px;
+    padding: 10px;
+}
+
+.courses .searchResults ul li {
+    cursor: pointer
+}
+
+.courses .searchResults ul li:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.courses .searchResults ul {
+    z-index: 2;
+    position: absolute;
+    background-color: #eee;
+    width: 800px;
+    padding: 10px;
+}

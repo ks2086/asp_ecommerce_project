@@ -1,0 +1,155 @@
+﻿@using Data.Models;
+@model Intranet.Models.ProductModelsAggregation;
+
+<h4 class="module-title">Dodaj nowy produkt</h4>
+<div class="row">
+
+    <div class="col s3">
+        @await Html.PartialAsync("PartialViews/EcommerceMainMenu")
+    </div>
+
+    <div class="col s9">
+        <form asp-action="Store">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+
+                <div class="input-field col s12">
+                    <input id="input_text" type="text" name="Title" data-length="255" required>
+                    <label asp-for="@Model.Product.Title" class="control-label"></label>
+                    <span asp-validation-for="@Model.Product.Title" class="text-danger"></span>
+                </div>
+
+                <div class="row">
+                    <div class="col s5">
+
+                        <div class="input-field col s12">
+                            <select name="Tax">
+                                <option value="" disabled selected>Wybierz z listy</option>
+                                <option value="0">0%</option>
+                                <option value="5">5%</option>
+                                <option value="8">8%</option>
+                                <option value="23">23%</option>
+                            </select>
+                            <label>Wybierz wartość podatku VAT</label>
+                        </div>
+
+                    </div>
+
+                    <div class="col s6">
+
+                        <div class="input-field col s12">
+                            <input id="input_text_2" type="number" min="0.01" step="0.01" name="PriceNetto" data-length="255" required>
+                            <label asp-for="@Model.Product.PriceNetto" class="control-label"></label>
+                            <span asp-validation-for="@Model.Product.PriceNetto" class=" text-danger"></span>
+                        </div>
+
+                    </div>
+                    <div class="col s1">
+
+                        <div class="input-field col s12">
+                            <p>PLN</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s4">
+
+                        <div class="input-field col s12">
+                            <select name="IsPromotion">
+                                <option value="0" selected>NIE</option>
+                                <option value="1">TAK</option>
+                            </select>
+                            <label>Produkt objęty promocją</label>
+                        </div>
+
+                    </div>
+
+                    <div class="col s4">
+
+                        <div class="input-field col s12">
+                            <select name="IsBestseller">
+                                <option value="0" selected>NIE</option>
+                                <option value="1">TAK</option>
+                            </select>
+                            <label>Produkt jest bestsellerem</label>
+                        </div>
+
+                    </div>
+
+                    <div class="col s4">
+
+                        <div class="input-field col s12">
+                            <select name="DifficultyLevel">
+                                <option value="1" selected>Początkujący</option>
+                                <option value="2">Średnio-zaawansowany</option>
+                                <option value="3">Zaawansowany</option>
+                            </select>
+                            <label>Poziom trudności</label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col s6">
+
+                        <div class="input-field col s12">
+                            <select name="Image">
+                                <option value="" disabled selected>Wybierz z listy</option>
+                                @foreach (var image in (List<ProductImage>)ViewData["Gallery"])
+                                {
+                                    <option value="@image.Id">@image.Title</option>
+                                }
+                            </select>
+                            <label>Wybierz pozycję z galerii</label>
+                        </div>
+
+                    </div>
+
+                    <div class="col s6">
+
+                        <div class="input-field col s12">
+                            <select name="Category">
+                                <option value="" disabled selected>Wybierz z listy</option>
+                                @foreach (var category in (List<ProductCategory>)ViewData["Categories"])
+                                {
+                                    <option value="@category.Id">@category.Title</option>
+                                }
+                            </select>
+                            <label>Wybierz pozycję z galerii</label>
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+                <div class="input-field col s12">
+                    <textarea id="textarea1" name="ShortDescription" class="materialize-textarea"></textarea>
+                    <label for="textarea1">Krótki opis produktu</label>
+                </div>
+
+                <div class="input-field col s12">
+                    <label>Podaj pełny opis produktu</label><br/><br/>
+                    <textarea name="text"></textarea>
+                    <script>
+                        CKEDITOR.replace('text');
+                    </script>
+                    <span asp-validation-for="@Model.Product.Text" class="text-danger"></span>
+                </div>
+
+
+                <div class="input-field col s12">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">
+                        Zapisz i wróć do listy produktów
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>

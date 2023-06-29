@@ -1,0 +1,11 @@
+﻿@{
+    int cartCounter = int.Parse(ViewData["CartCount"].ToString());
+}
+<a href="/Ecommerce/Cart" id="cartButton" type="button" class="btn btn-outline-warning position-relative">
+    <i class="fa-solid fa-cart-shopping"></i>
+    @if(cartCounter > 0)
+    {
+        <div id="cartCounterPill" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary"><span class="cartItemsCounter">@cartCounter</span><span class="visually-hidden">Produkty w koszyku</span></div>
+    }
+</a>
+

@@ -1,0 +1,43 @@
+﻿@using Data.Models;
+
+<h4 class="module-title">Lista kategorii produktowych</h4>
+<div class="row">
+
+    <div class="col s3">
+        @await Html.PartialAsync("PartialViews/EcommerceMainMenu")
+    </div>
+
+    <div class="col s9">
+        <a href="/ProductCategory/Create" class="waves-effect waves-teal btn-flat">Dodaj nową pozycję</a>
+        <hr />
+        @if (ViewData["items"] != null && (ViewData["items"] as IEnumerable<object>)?.Any() == true)
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tytuł</th>
+                        <th>Data dodania</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var type in (List<ProductCategory>)ViewData["items"])
+                    {
+                        <tr>
+                            <td>@type.Title</td>
+                            <td>@type.Created_at</td>
+                            <td><a href="/ProductCategory/Edit?id=@type.Id" class="waves-effect waves-teal btn-flat">Edycja</a></td>
+                            <td><a href="/ProductCategory/Delete?id=@type.Id" class="waves-effect waves-red btn-flat red">Usuń</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>Brak treści do wyświetlenia</p>
+        }
+    </div>
+
+</div>

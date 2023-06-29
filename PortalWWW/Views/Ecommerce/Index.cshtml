@@ -1,0 +1,161 @@
+﻿@using Data.Models;
+
+@{
+
+    var categories = ViewData["Categories"] as List<ProductCategory>;
+    var selectedCategory = ViewData["SelectedCategory"] as string;
+
+    var products = ViewData["Products"] as List<Product>;
+    var allProductsCount = ViewData["AllProductsCount"];
+
+    var difficultyLevel = ViewData["DifficultyLevel"] as string;
+    var priceFrom = ViewData["PriceFrom"] as string;
+    var priceTo = ViewData["PriceTo"] as string;
+
+}
+<div class="product-details">
+
+    <div class="container pt-4 pb-4">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Strona główna</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Lista produktów</li>
+            </ol>
+        </nav>
+
+        <h1>Lista naszych produktów</h1>
+        <h3>
+            W naszej bazie znajduje się <strong>@allProductsCount kursów</strong> Skorzystaj z wyszukiwarki lub filtórw z boku aby zawęzić listę kursów do własnych upodobań.
+        </h3>
+
+    </div>
+
+    <div class="courses p-4">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-sm-12 col-md-3 col-lg-3">
+
+                    <div class="mb-4">
+                        <h3><strong>Kategoria kursów</strong></h3>
+
+                        <div class="list-group">
+                            <a asp-area="" asp-controller="Ecommerce" asp-action="Index" type="button" class="list-group-item list-group-item-action" aria-current="true">
+                                Wszystkie kursy
+                            </a>
+
+                            @if (categories != null && (categories as IEnumerable<object>)?.Any() == true)
+                            {
+                                @foreach (var category in categories)
+                                {
+                                    <a href="/Ecommerce?category=@category.Slug" type="button" class="list-group-item list-group-item-action " aria-current="true">
+                                        @category.Title
+                                    </a>
+                                }
+                            }
+
+                            
+                           
+                        </div>
+                    </div>
+
+                    <hr/>
+                    <h2>Filtry</h2>
+
+                    <form asp-controller="Ecommerce" asp-action="Index" method="get">
+                        <input type="hidden" name="category" value="@selectedCategory" />
+
+                        <div class="mb-4">
+                            <h4><strong>Poziom zaawansowania</strong></h4>
+
+                            <ul class="list-unstyled">
+                                <li><label><input type="radio" name="dificultyLevel" value="1" @(difficultyLevel == "1" ? "checked" : "") /> Początkujący</label></li>
+                                <li><label><input type="radio" name="dificultyLevel" value="2" @(difficultyLevel == "2" ? "checked" : "") /> Średnio zaawansowany</label></li>
+                                <li><label><input type="radio" name="dificultyLevel" value="3" @(difficultyLevel == "3" ? "checked" : "") /> Zaawansowany</label></li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4><strong>Cena</strong></h4>
+
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label>Od</label>
+                                        <input type="number" name="price_from" value="@priceFrom" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label>Do</label>
+                                        <input type="number" name="price_to" value="@priceTo" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" type="submit">Zastosuj filtry</button>
+                        </div>
+                    </form>
+
+
+
+                </div>
+                <div class="col-sm-12 col-md-9 col-lg-9">
+
+                   <form asp-controller="Search" asp-action="Index" method="get"> 
+                       <div class="form-group">
+                            <label><strong>Skorzystaj z wyszukiwarki</strong></label>
+                            <div class="input-group mb-3">
+                                <input name="query" class="form-control" id="searchInput" placeholder="Wpisz wyszukiwaną frazę" required>
+                                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-search"></i></button>
+                            </div>
+                            <div class="searchResults"></div>
+                       </div>
+                    </form>
+
+                    <hr/>
+
+
+                    @if (products != null && (products as IEnumerable<object>)?.Any() == true)
+                    {
+                        @foreach (var product in products)
+                        {
+                            <div class="@(product.IsPromotion ? "card mb-3 isPromotedRow" : "card mb-3")">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="@product.Images.Url" class="img-fluid rounded-start" alt="@product.Title">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h2 class="card-title"><strong>@product.Title</strong></h2>
+                                            <h3 class="card-title">Za jedyne: <strong><span class="promoValue">@product.PriceBrutto.ToString("0.00")</span> zł</strong></h3>
+                                            <p class="card-text">@product.ShortDescription</p>
+                                            <div class="d-grid gap-2">
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <a href="/Ecommerce/Product?slug=@product.Slug" class="btn btn-secondary">Zobacz szczegóły</a>
+                                                    <form class="addToCart"><input type="hidden" name="product" value="@product.Id" /><button type="submit" type="submit" class="btn btn-warning">Dodaj do koszyka</button></form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>Brak treści do wyświetlenia</p>
+                    }
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

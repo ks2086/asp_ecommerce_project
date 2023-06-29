@@ -1,0 +1,24 @@
+﻿@using Data.Models;
+@using System.Globalization;
+
+@{
+    var promotion = ViewData["Promotion"] as Promotion;
+    string formattedDate = null;
+    if(promotion != null)
+    {
+        string format = "dd.MM.yyyy HH:mm:ss";
+        DateTime date;
+
+        if (DateTime.TryParseExact(promotion.Ends_at.ToString(), format, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+        {
+            formattedDate = date.ToString("yyyy-MM-ddTHH:mm:ss");
+        }
+    }
+}
+
+@if(promotion != null)
+{
+    <div id="promoBox" class="promotionInfo" data-value="@promotion.Value" data-end="@formattedDate">
+        <h3><strong>@promotion.Title</strong><br/><small>Kursy w promocyjnej cenie dostępne jeszcze przez:</small><br /><span class="counter"></span><br /><a href="/Ecommerce/Promotion">Zobacz produkty promocyjne</a></h3>
+    </div>
+}
